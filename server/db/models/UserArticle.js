@@ -60,7 +60,7 @@ UserArticle.findAllByUser = function (currentUserId) {
         include: [
             {
                 model: Article,
-                attributes: ["id", "url"]
+                attributes: ['id', 'url', 'author','description','imageURL','logo','publisher','title'],
             },
             {
                 model: Tagging,

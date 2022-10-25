@@ -20,8 +20,6 @@ export function UserArticles() {
         const tags = element.taggings.map((item) => item.tag.name);
         element.tags = tags;
     });
-    // console.log("ALL ARTICLES > ", articles);
-    // console.log("ALL FILTERD TAGS > ", filteredTags);
 
     useEffect(() => {
         dispatch(_clearSharingId());
@@ -33,7 +31,6 @@ export function UserArticles() {
         const arrToShare = articles
             .filter((article) => validateFilter(article))
             .map((article) => article.id);
-        console.log("array to share", arrToShare);
         dispatch(_setFilteredArticlesToStore(arrToShare)),
             history.push("/share/message");
     }
@@ -55,7 +52,6 @@ export function UserArticles() {
                 const containsKeyValue = filteredTags.every(
                     (key) => article[key] && article[key] !== false
                 );
-
                 return containsKeyValue;
             }
         }

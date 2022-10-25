@@ -17,7 +17,6 @@ const getallArticles = async (req, res, next) => {
 // POST /api/articles - CREATES USER ARTICLE WITH ALL ATTRIBUTES (BOTH FROM WEB AND EXTENSION)
 const postArticle = async (req, res, next) => {
   const t = await sequelize.transaction({ autocommit: false });
-  console.log(req.body)
   try {
     let url = req.body.article.url;
     let articleName = req.body.article.name;
@@ -26,14 +25,27 @@ const postArticle = async (req, res, next) => {
     let userId = req.body.userId;
     let tagsArr = req.body.article.tags;
 
-    console.log("articleName:",articleName )
     //GET METADATA
     const metaData = await Article.prototype.metaData(url)
-    console.log('metaData', metaData)
+    const {
+      author = null,
+      description = null,
+      image = null,
+      logo = null,
+      publisher = null,
+      title = null} = metaData
 
     // CREATE ARTICLE
     const [article, ifCreated] = await Article.findOrCreate({
-      where: { url: url },
+      where: { 
+        url: url,
+        author: author,
+        description: description,
+        imageURL: image,
+        logo: logo,
+        publisher: publisher,
+        title: title
+       },
       transaction: t,
     });
 
@@ -73,7 +85,7 @@ const postArticle = async (req, res, next) => {
         include: [
           {
             model: Article,
-            attributes: ['id', 'url'],
+            attributes: ['id', 'url', 'author','description','imageURL','logo','publisher','title'],
           },
           {
             model: Tagging,
@@ -169,7 +181,7 @@ const changeArticle = async (req, res, next) => {
       include: [
         {
           model: Article,
-          attributes: ['id', 'url'],
+          attributes: ['id', 'url', 'author','description','imageURL','logo','publisher','title'],
         },
         {
           model: Tagging,

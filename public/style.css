@@ -125,7 +125,7 @@ form div {
   flex-direction: column;
   border-radius: 5px;
   margin: 3px;
-  background-color: var(--color-bookmars-background);
+  /* background-color: var(--color-bookmars-background); */
 }
 
 /* ----------------------------------- TAG SELECTOR ---------------------- */
@@ -189,11 +189,30 @@ form div {
   box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
   background-color: var(--color-white);
 }
+
+.single-article-metadata-container{
+  max-width: 90%;
+}
+
+.single-article-metadata-img{
+  max-width: 100%
+}
+
 .article-name--single-article {
   /* color: rgb(87, 87, 87); */
   color: var(--color-submit-btn);
-
   font-style: italic;
+}
+
+/* .single-article-tag-style{
+
+} */
+
+.single-article-tag-style span{
+  background-color:rgb(82, 82, 207);
+  color: white;
+  padding: 5px;
+  border-radius: 10px
 }
 
 .title-delete--single-article--container,
@@ -218,16 +237,18 @@ form div {
   position: absolute;
   bottom: 0px;
   right: 0px;
-  color: var(--color-white);
-  text-transform: uppercase;
-  font-size: 11px;
+  font-size: large}
+
+.read-btn-text{
+  color: grey;
+  font-size: 11px; 
 }
+
 .read-btn-true {
-  /* background-color: #b1e693; */
-  background-color: var(--color-submit-btn);
+  color:lightblue;
 }
 .read-btn-false {
-  background-color: var(--color-yellow);
+  color: grey;
 }
 
 /* ------------------------------ BTNS ------------------------------------- */

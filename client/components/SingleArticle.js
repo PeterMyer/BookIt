@@ -6,7 +6,6 @@ import { markUserArticle, deleteProduct } from "../store/userArticles";
 
 export function SingleArticle(props) {
     const dispatch = useDispatch();
-    const articleMetaData = useSelector((state) => state.metaData);
     const user = useSelector((state) => state.auth);
     const article = props.article;
     const taggings = article.taggings;
@@ -28,9 +27,18 @@ export function SingleArticle(props) {
     return (
         <div className="single-article--container">
             <div className="title-delete--single-article--container">
+                <section className="single-article-metadata-container">
+                    <img className = "single-article-metadata-img"
+                        alt = "original article image"
+                        src = {article.article.imageURL}
+                    />
+                    <strong>{article.article.title}</strong>
+                    <div>{article.article.publisher}</div>
+
+                </section>
+                <hr/>
                 <span className="title-name--single-article">
                     <span className="bold--single-article--container">
-                        Title:
                     </span>{" "}
                     <span>{article.name}</span>
                 </span>
@@ -44,26 +52,25 @@ export function SingleArticle(props) {
                     </button>
                 </span>
             </div>
-            <span className="bold--single-article--container">Url</span>
+            <span className="bold--single-article--container"></span>
             <a href={article.article.url}>
-                :{" "}
+                {" "}
                 <span className="article-name--single-article">
                     {article.article.url.slice(0, 30) + "..."}
                 </span>
             </a>
-            <br />
+            {/* <br />
             <span className="bold--single-article--container">Note</span>:{" "}
             {article.note ? `${article.note}` : "none"}
-            <br />
-            <span className="bold--single-article--container">Tags</span>:{" "}
+            <br /> */}
+            <span className="bold--single-article--container"></span>
             {taggings.length
                 ? taggings
                       .map((tagging, idx) => {
                           return (
-                              <span key={idx.toString()}>
-                                  {" "}
-                                  {tagging.tag.name}
-                              </span>
+                              <div className="single-article-tag-style" key={idx.toString()}>
+                                  <span>{tagging.tag.name}</span>
+                              </div>
                           );
                       })
                       .reduce((prev, curr) => {
@@ -72,27 +79,18 @@ export function SingleArticle(props) {
                 : "none"}
             <br />
             <div>
-                <div>
-                    <span className="bold--single-article--container">
-                        Status
-                    </span>
-                    : {article.readAt ? "read" : "unread"}
-                </div>
                 <div className="footer--single-article--container">
                     {article.readAt ? (
-                        <button
-                            onClick={markAsCompleted}
-                            className="pure-button read-btn--single-article read-btn-true"
+                        <button onClick={markAsCompleted}
+                        className="read-btn--single-article read-btn-true"
                         >
-                            mark as unread
+                        <i class="fa-solid fa-book-open"></i><i className="read-btn-text"> read </i>
                         </button>
                     ) : (
                         <button
                             onClick={markAsCompleted}
-                            className="pure-button read-btn--single-article read-btn-false"
-                        >
-                            mark as read
-                        </button>
+                            className="read-btn--single-article read-btn-false"
+                        ><i class="fa-solid fa-book"></i><i className="read-btn-text"> unread </i> </button>
                     )}
                 </div>
             </div>
