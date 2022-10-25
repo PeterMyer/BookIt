@@ -6,18 +6,24 @@ import CreatableSelect from 'react-select/creatable';
 import ReactDOM from 'react-dom';
 
 export function EditBookmark(props) {
+  console.log(props)
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth);
-  const bookmark = props.data;
+  const bookmark = props.data.url? props.data: props.data.article
   const bookmarks = useSelector((state) => state.userArticles);
 
   const [isModalOpen, setModal] = useState(false);
   const [id, setId] = useState(bookmark.id);
   const [url, setUrl] = useState(bookmark.url);
-  const [bookmarkName, setBookmarkName] = useState(bookmark.name);
-  const [note, setNote] = useState(bookmark.note);
-  const [tags, setTags] = useState(bookmark.tags);
-  const [read, setRead] = useState(bookmark.read);
+  const [bookmarkName, setBookmarkName] = useState(bookmark.name? bookmark.name:props.data.name);
+  const [note, setNote] = useState(bookmark.note? bookmark.note:props.data.note);
+  const [tags, setTags] = useState(bookmark.tags? bookmark.tags:props.data.tags);
+  const [read, setRead] = useState(bookmark.read? bookmark.read:props.data.read);
+
+  console.log(url)
+  console.log(bookmarks)
+
+
 
   //creates list of unique tags for the dropdown menu
   const tagOptionsArrDupl = [];
@@ -266,13 +272,11 @@ export function EditBookmark(props) {
         )
       ) : (
         <button
-          className="btn btn-secondary"
-          style={{ fontSize: '0.7rem' }}
           onClick={() => {
             setModal(true);
           }}
         >
-          Edit
+          <i class="fa-solid fa-pen-to-square"></i>
         </button>
       )}
     </div>

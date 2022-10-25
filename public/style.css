@@ -190,6 +190,17 @@ form div {
   background-color: var(--color-white);
 }
 
+.single-article--container:hover .delete-btn--single-article, 
+.delete-btn--single-article:hover{
+  display: inline-block
+}
+
+.single-article--container:hover .edit-btn--single-article, 
+.edit-btn--single-article:hover{
+  display: inline-block
+}
+
+
 .single-article-metadata-container{
   max-width: 90%;
 }
@@ -198,40 +209,48 @@ form div {
   max-width: 100%
 }
 
+.single-article-buttons-container{
+
+}
+
 .article-name--single-article {
   /* color: rgb(87, 87, 87); */
   color: var(--color-submit-btn);
   font-style: italic;
 }
 
-/* .single-article-tag-style{
-
-} */
+.single-article-tags-container{
+display:flex;
+flex-flow: row wrap
+}
 
 .single-article-tag-style span{
   background-color:rgb(82, 82, 207);
   color: white;
   padding: 5px;
-  border-radius: 10px
+  border-radius: 10px;
+  font-size: small;
+  margin: 2px
+
 }
 
 .title-delete--single-article--container,
 .footer--single-article--container {
   position: relative;
 }
-.bold--single-article--container {
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: bold;
-}
+
 .delete-btn--single-article {
-  color: black;
-  background-color: var(--color-cancel-btn);
-  position: absolute;
-  top: 0px;
-  right: 0px;
+  color: grey;
   font-size: 11px;
   text-transform: uppercase;
+  display: none
+}
+
+.edit-btn--single-article {
+  color: grey;
+  font-size: 11px;
+  text-transform: uppercase;
+  display: none
 }
 .read-btn--single-article {
   position: absolute;
