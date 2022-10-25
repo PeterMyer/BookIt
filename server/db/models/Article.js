@@ -25,6 +25,29 @@ const Article = db.define('article', {
       notNull: true,
     },
   },
+  author: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
+  description:{
+    type: Sequelize.TEXT,
+    allowNull: true
+  },
+  imageURL:{
+    type: Sequelize.TEXT,
+    allowNull: true
+  },
+  logo:{
+    type: Sequelize.TEXT,
+    allowNull: true
+  },
+  publisher:{ 
+    type: Sequelize.STRING,
+    allowNull:true},
+  title: {
+    type: Sequelize.STRING,
+    allowNull:true
+  }
 });
 
 module.exports = Article;

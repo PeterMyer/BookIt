@@ -17,6 +17,7 @@ const getallArticles = async (req, res, next) => {
 // POST /api/articles - CREATES USER ARTICLE WITH ALL ATTRIBUTES (BOTH FROM WEB AND EXTENSION)
 const postArticle = async (req, res, next) => {
   const t = await sequelize.transaction({ autocommit: false });
+  console.log(req.body)
   try {
     let url = req.body.article.url;
     let articleName = req.body.article.name;
@@ -24,6 +25,11 @@ const postArticle = async (req, res, next) => {
     let isPrivate = req.body.article.isPrivate;
     let userId = req.body.userId;
     let tagsArr = req.body.article.tags;
+
+    console.log("articleName:",articleName )
+    //GET METADATA
+    const metaData = await Article.prototype.metaData(url)
+    console.log('metaData', metaData)
 
     // CREATE ARTICLE
     const [article, ifCreated] = await Article.findOrCreate({
