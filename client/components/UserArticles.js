@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { SingleArticle } from "./SingleArticle";
 import Sidebar from "./Navigation/Sidebar";
@@ -76,11 +75,9 @@ export function UserArticles() {
             <div className="right-side--user-article-container">
                 <div className="user-articles-total--username-div">
                     <h4>
-                        {user.username[0].toUpperCase() +
-                            user.username.slice(1)}
-                        's bookmark{articles.length > 1 ? `s` : ``}
+                        Your Pages
                     </h4>
-                    <h4>Total bookmarks: {articles.length}</h4>
+                    <h4>Total Pages: {articles.length}</h4>
                 </div>
                 <div className="display-articles--container pure-g">
                     {articles

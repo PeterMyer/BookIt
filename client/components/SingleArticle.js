@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { markUserArticle, deleteProduct } from "../store/userArticles";
 import { EditBookmark } from './EditBookmark/EditBookmark';
 
@@ -10,7 +9,6 @@ export function SingleArticle(props) {
     const user = useSelector((state) => state.auth);
     const article = props.article;
     const taggings = article.taggings;
-    const tags = article.tags;
 
     function markAsCompleted() {
         if (article.readAt) {
