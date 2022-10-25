@@ -7,7 +7,7 @@ class NewUser extends Component {
         super();
         this.state = {
             username: "",
-            email: "",
+            // email: "",
             password: ""
         };
 
@@ -26,7 +26,7 @@ class NewUser extends Component {
         this.props.createNewUser({ ...this.state });
         this.setState({
             username: "",
-            email: "",
+            // email: "",
             password: ""
         });
     }
@@ -55,7 +55,7 @@ class NewUser extends Component {
                         </span>
                     </div>
                     <br />
-                    <div className="pure-control-group">
+                    {/* <div className="pure-control-group">
                         <label htmlFor="email">
                             <small>Email</small>
                         </label>
@@ -67,7 +67,7 @@ class NewUser extends Component {
                         <span className="pure-form-message-inline">
                             This is a required field.
                         </span>
-                    </div>
+                    </div> */}
                     <br />
                     <div className="pure-control-group">
                         <label htmlFor="password">

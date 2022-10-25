@@ -125,7 +125,7 @@ form div {
   flex-direction: column;
   border-radius: 5px;
   margin: 3px;
-  background-color: var(--color-bookmars-background);
+  /* background-color: var(--color-bookmars-background); */
 }
 
 /* ----------------------------------- TAG SELECTOR ---------------------- */
@@ -189,45 +189,85 @@ form div {
   box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
   background-color: var(--color-white);
 }
+
+.single-article--container:hover .delete-btn--single-article, 
+.delete-btn--single-article:hover{
+  display: inline-block
+}
+
+.single-article--container:hover .edit-btn--single-article, 
+.edit-btn--single-article:hover{
+  display: inline-block
+}
+
+
+.single-article-metadata-container{
+  max-width: 90%;
+}
+
+.single-article-metadata-img{
+  max-width: 100%
+}
+
+.single-article-buttons-container{
+
+}
+
 .article-name--single-article {
   /* color: rgb(87, 87, 87); */
   color: var(--color-submit-btn);
-
   font-style: italic;
+}
+
+.single-article-tags-container{
+display:flex;
+flex-flow: row wrap
+}
+
+.single-article-tag-style span{
+  background-color:rgb(82, 82, 207);
+  color: white;
+  padding: 5px;
+  border-radius: 10px;
+  font-size: small;
+  margin: 2px
+
 }
 
 .title-delete--single-article--container,
 .footer--single-article--container {
   position: relative;
 }
-.bold--single-article--container {
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: bold;
-}
+
 .delete-btn--single-article {
-  color: black;
-  background-color: var(--color-cancel-btn);
-  position: absolute;
-  top: 0px;
-  right: 0px;
+  color: grey;
   font-size: 11px;
   text-transform: uppercase;
+  display: none
+}
+
+.edit-btn--single-article {
+  color: grey;
+  font-size: 11px;
+  text-transform: uppercase;
+  display: none
 }
 .read-btn--single-article {
   position: absolute;
   bottom: 0px;
   right: 0px;
-  color: var(--color-white);
-  text-transform: uppercase;
-  font-size: 11px;
+  font-size: large}
+
+.read-btn-text{
+  color: grey;
+  font-size: 11px; 
 }
+
 .read-btn-true {
-  /* background-color: #b1e693; */
-  background-color: var(--color-submit-btn);
+  color:lightblue;
 }
 .read-btn-false {
-  background-color: var(--color-yellow);
+  color: grey;
 }
 
 /* ------------------------------ BTNS ------------------------------------- */
@@ -541,17 +581,15 @@ form div {
   border: 1px solid black;
   max-width: 80%;
   flex-direction: column;
-  min-width: 500px;
   margin: 10px;
   border-radius: 10px;
 }
 
 .dataviz-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
-  min-width: 300px;
-  max-width: 95%;
+  max-width: 90%;
 }
 
 tbody {
@@ -587,6 +625,16 @@ tr {
   /* width: 100%; */
   /* height: 100%; */
   display: block;
+}
+
+.backlog-plot-container{
+  width: 50%;
+  height: 100%
+}
+
+.tag-plot-container{
+  width: 50%;
+  height: 80%
 }
 
 /* ----------------------------------MODAL FOR EDIT/DELETE BOOKMARKS-------------------------------- */
@@ -651,3 +699,4 @@ tr {
   margin: 0 0 3.2rem 0;
   word-break: break-all;
 }
+

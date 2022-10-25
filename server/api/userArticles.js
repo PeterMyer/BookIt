@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
       include: [
         {
           model: Article,
-          attributes: ['id', 'url'],
+          attributes: ['id', 'url', 'author','description','imageURL','logo','publisher','title'],
         },
         {
           model: Tagging,
@@ -76,7 +76,7 @@ router.put('/:id', async (req, res, next) => {
       include: [
         {
           model: Article,
-          attributes: ['id', 'url'],
+          attributes: ['id', 'url', 'author','description','imageURL','logo','publisher','title'],
         },
         {
           model: Tagging,
@@ -105,7 +105,7 @@ router.delete('/:id', async (req, res, next) => {
       include: [
         {
           model: Article,
-          attributes: ['id', 'url'],
+          attributes: ['id', 'url', 'author','description','imageURL','logo','publisher','title'],
         },
         {
           model: Tagging,

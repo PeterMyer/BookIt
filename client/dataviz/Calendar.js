@@ -107,10 +107,12 @@ export function Calendar() {
   return (
     <Plot
       data={calendarTrace}
+      useResizeHandler={true}
+      style={{width: '100%', height: '100%'}}
+      config={{displayModeBar: false}}
       layout={{
         autosize: false,
         height:300,
-        width: 1200,
 
         yaxis: {
           showline: true,

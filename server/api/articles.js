@@ -25,9 +25,27 @@ const postArticle = async (req, res, next) => {
     let userId = req.body.userId;
     let tagsArr = req.body.article.tags;
 
+    //GET METADATA
+    const metaData = await Article.prototype.metaData(url)
+    const {
+      author = null,
+      description = null,
+      image = null,
+      logo = null,
+      publisher = null,
+      title = null} = metaData
+
     // CREATE ARTICLE
     const [article, ifCreated] = await Article.findOrCreate({
-      where: { url: url },
+      where: { 
+        url: url,
+        author: author,
+        description: description,
+        imageURL: image,
+        logo: logo,
+        publisher: publisher,
+        title: title
+       },
       transaction: t,
     });
 
@@ -67,7 +85,7 @@ const postArticle = async (req, res, next) => {
         include: [
           {
             model: Article,
-            attributes: ['id', 'url'],
+            attributes: ['id', 'url', 'author','description','imageURL','logo','publisher','title'],
           },
           {
             model: Tagging,
@@ -163,7 +181,7 @@ const changeArticle = async (req, res, next) => {
       include: [
         {
           model: Article,
-          attributes: ['id', 'url'],
+          attributes: ['id', 'url', 'author','description','imageURL','logo','publisher','title'],
         },
         {
           model: Tagging,

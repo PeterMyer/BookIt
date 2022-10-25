@@ -93,13 +93,13 @@ export function TimeChart() {
   data.push(readArticleTrace, addedArticleTrace);
 
   return (
-    <div>
+    <div className = "backlog-plot-container">
       <h3>Total Backlog v. Amount Read</h3>
     <Plot
       data={data}
+      useResizeHandler={true}
+      style={{width: '100%', height: '100%'}}
       layout={{
-        width: 550,
-        height: 550,
         margin:{b:0},
         barmode: 'stack',
         xaxis: {
@@ -131,6 +131,7 @@ export function TimeChart() {
           type: 'linear',
         },
       }}
+      config={{"responsive": true}}
     />
     </div>
   );

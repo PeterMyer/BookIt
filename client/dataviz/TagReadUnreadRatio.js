@@ -96,31 +96,34 @@ export function TagReadUnread() {
 
 
   return (
-    <div>
+    <div className = 'tag-plot-container'>
       <div align = 'center'>
     <h3>Tag Overview</h3>
     <h4>Divided by Article Read Status</h4>
     </div>
     <Plot
       data={data}
+      useResizeHandler={true}
+      style={{width: '100%', height: '100%'}}
       layout = {{
-        height: 500,
-        width: 700,
         margin: {
+          autoexpand: true,
           l: 0,
           r: 0,
-          b: 0,
-          t:50,
+          b: 20,
+          t: 0,
           pad: 0,
         },
         showlegend: true,
-        grid: {rows: 1,
-              columns: 2,
-              pattern: 'independent',
-      }}}
+        legend: {
+          x: 1,
+          y: 1,
+          xanchor: "right"
+        },
+    }}
       config={{
         "displaylogo": false,
-        'modeBarButtonsToRemove': ['pan2d','lasso2d']
+        'modeBarButtonsToRemove': ['pan2d','lasso2d'],
            }}
     />
     </div>

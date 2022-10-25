@@ -11,7 +11,7 @@ export function UserMetrics() {
   return (
     <div >
       <h1 align="center">Here Are Your Latest User Metrics</h1>
-      <h3 align="center">Visualize Your Reading Habits</h3>
+      <h2 align="center">Visualize Your Reading Habits</h2>
       <div align="center" >
         <Indicator />
       </div>
@@ -19,9 +19,9 @@ export function UserMetrics() {
         <div className="dataviz-box">
           <h1 className = "dvSectionHeader"> Overview of Your Backlog</h1>
           <BasicMetrics/>
-        <div align="center" className = "dataviz-row">
-          <TimeChart />
-          <TagReadUnread/>
+          <div className = "dataviz-row">
+            <TimeChart id="backlogChart"/>
+            <TagReadUnread id="tagChart"/>
           </div>
         </div>
       </div>
