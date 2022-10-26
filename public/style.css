@@ -568,31 +568,33 @@ flex-flow: row wrap
 
 .dvSectionHeader {
   display: flex;
-  background-color: #add8e6;
   height: 70px;
   margin: 0;
   padding: 10;
   border-radius: 10px;
-  align-items: center;
-  justify-content: center;
+  align-self: flex-start;
 }
 .dataviz-box {
   display: flex;
-  border: 1px solid black;
+  justify-content: space-between;
+  border: none;
   max-width: 80%;
   flex-direction: column;
-  margin: 10px;
+  margin: 15px;
   border-radius: 10px;
+  align-content: center;
+  
 }
 
 .dataviz-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-direction: row;
   max-width: 90%;
+  margin: 0px
 }
 
-tbody {
+.weekly-article-list-table{
   display: block;
   overflow: auto;
   height: 200px;
@@ -601,16 +603,15 @@ tbody {
   border: 1px solid black;
 }
 
-tr {
-  display: block;
-  text-align: left;
-  border: 1px solid black;
-}
+
 .highlight {
   color: #48b2e7;
 }
 
 .articlerow {
+  display: block;
+  text-align: left;
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: baseline;
@@ -698,5 +699,70 @@ tr {
   font-weight: 300;
   margin: 0 0 3.2rem 0;
   word-break: break-all;
+}
+
+* {box-sizing: border-box}
+
+/* ----------------------------------DataViz 2-------------------------------- */
+
+.user-metrics-container{
+    display:flex;
+    flex-direction: row;
+}
+
+.tab {
+    display: flex;
+    flex-direction: column;
+    float: left;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+    width: 20%;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  /* float: left;
+  padding: 0px 12px;
+  width: 100%;
+  border-left: none;
+  height: 300px;
+  display:none */
+}
+
+.user-metrics-tab-content-container{
+    display: flex;
+    flex-direction: column;
+    align-content:center;
+    width: 100%
+}
+
+.calendar-article-list-table{
+  width:100%;
+  border: none
+  
 }
 

@@ -66,7 +66,6 @@ export function TimeChart() {
   xAddedDates.push(DateTime.utc().toFormat('yyyy-MM-dd'));
   let mostRecentValue = yTotalArticles.at(-1);
   yTotalArticles.push(mostRecentValue);
-  console.log('added dates',xAddedDates)
 
   //TRACE DATA FOR TIMECHART
   const readArticleTrace = {
@@ -77,7 +76,6 @@ export function TimeChart() {
     mode: 'lines',
     marker: { color: 'blue' },
     fill: 'tozeroy',
-    line: { shape: 'spline' },
   };
   const addedArticleTrace = {
     x: xAddedDates,
@@ -87,14 +85,13 @@ export function TimeChart() {
     mode: 'lines',
     marker: { color: 'red' },
     fill: 'tozeroy',
-    line: { shape: 'spline' },
   };
 
   data.push(readArticleTrace, addedArticleTrace);
 
   return (
     <div className = "backlog-plot-container">
-      <h3>Total Backlog v. Amount Read</h3>
+      <h4>Total Backlog v. Amount Read</h4>
     <Plot
       data={data}
       useResizeHandler={true}

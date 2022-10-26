@@ -26,8 +26,8 @@ export function BasicMetrics() {
 
   return (
   <div>
-    <h2>
+    <h3>
       You've read <span class="highlight">{readArticles.length}</span> of your <span class="highlight">{userArticles.length}</span> saved articles, using <span class="highlight">{allTagsList.length}</span>  different tags.
-    </h2>
+    </h3>
   </div>
   )}

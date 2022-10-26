@@ -88,18 +88,18 @@ export function TagReadUnread() {
         hole: .3,
         type: 'pie',
         domain: {
-          row: 0,
-          column: 1}}
+          row: 1,
+          column:0 }}
 
     data.push(remainingTagTrace)
     data.push(readTagTrace)
 
 
   return (
-    <div className = 'tag-plot-container'>
+    <div>
       <div align = 'center'>
-    <h3>Tag Overview</h3>
-    <h4>Divided by Article Read Status</h4>
+    <h4>Tag Overview</h4>
+    <h5>Divided by Article Read Status</h5>
     </div>
     <Plot
       data={data}
@@ -107,19 +107,23 @@ export function TagReadUnread() {
       style={{width: '100%', height: '100%'}}
       layout = {{
         margin: {
-          autoexpand: true,
+          autoexpand: false,
           l: 0,
           r: 0,
-          b: 20,
+          b: 0,
           t: 0,
           pad: 0,
         },
         showlegend: true,
         legend: {
-          x: 1,
-          y: 1,
-          xanchor: "right"
+
+          xanchor: "left",
+          yanchor: "center"
         },
+        grid: {rows: 2,
+          columns: 1,
+          pattern: 'independent',
+  }
     }}
       config={{
         "displaylogo": false,

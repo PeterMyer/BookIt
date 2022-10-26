@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
@@ -7,6 +7,18 @@ import {readArticlesDates} from './dataVizHelpers'
 export function Calendar() {
   const userArticles = useSelector((state) => state.userArticles);
   const zdata = [];
+  let [readArtcilesOnDate, setReadArticles] = useState([])
+  let [selectedDate, setselectedDate] = useState(null)
+
+
+  function handleClick(data){
+    console.log('data', data)
+    let seperatedDate = data.points[0].text.split(" ")
+    let cleanedDate = seperatedDate[0].trim()
+      setselectedDate(cleanedDate)
+    let selectedArtciles = sortedArticles[cleanedDate]
+    setReadArticles(selectedArtciles)
+  }
 
   //Get individual read articles organized by date read
   //Using a helper function shared between the different dataviz oomponents
@@ -75,6 +87,8 @@ export function Calendar() {
       for (let j = 0; j < keyDates.length; j++) {
         if (calendarDate === keyDates[j]) {
           zdata.push(sortedArticles[keyDates[j]].length);
+          text.splice(i,1,`${calendarDate} <br>Articles Read : ${sortedArticles[keyDates[j]].length}`)
+
           continue perday;
         }
       }
@@ -104,31 +118,61 @@ export function Calendar() {
   //-----Plot Graph ------//
   //Return <Plot> react-plotly.js object to be displayed on UserMetrics page.
   // Sets overall graph size and display options
-  return (
-    <Plot
-      data={calendarTrace}
-      useResizeHandler={true}
-      style={{width: '100%', height: '100%'}}
-      config={{displayModeBar: false}}
-      layout={{
-        autosize: false,
-        height:300,
 
-        yaxis: {
-          showline: true,
-          tickmode: 'array',
-          ticktext: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-          tickvals: [1, 2, 3, 4, 5, 6,7],
-          title: 'Weekdays',
-        },
-        xaxis:{
-          showline:false,
-          showgrid:false,
-          zeroline:false,
-          tickmode:'array',
-          ticktext:month_names,
-          tickvals:[1,5,9,14,18,23,27,31,36,40,44,49]
-      }}}
-    />
+
+  return (
+    <>
+      <Plot
+        data={calendarTrace}
+        useResizeHandler={true}
+        style={{width: '100%', height: '100%'}}
+        config={{displayModeBar: false}}
+        onClick={((data)=>handleClick(data))}
+        layout={{
+          autosize: false,
+          height:200,
+          margin:{      
+            t: 0,
+            b: 60
+          },
+
+          yaxis: {
+            showline: true,
+            tickmode: 'array',
+            ticktext: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            tickvals: [1, 2, 3, 4, 5, 6,7],
+            title: 'Weekdays',
+          },
+          xaxis:{
+            showline:false,
+            showgrid:false,
+            zeroline:false,
+            tickmode:'array',
+            ticktext:month_names,
+            tickvals:[1,5,9,14,18,23,27,31,36,40,44,49]
+        }}}
+      />
+      <div >
+        {readArtcilesOnDate ? readArtcilesOnDate.map((article) => {
+          return (
+            <table className = "calendar-article-list-table">
+              <thead><strong>Read {selectedDate} </strong></thead>
+              <tbody>
+                <tr key={article.id} >
+                  <td ><i>{article.name}</i></td>
+                  <td><i>{article.article.publisher}</i></td>
+                  <td >
+                    <a href={article.article.url}>
+                    <div>{article.article.title}</div>
+                    </a>
+                  </td>
+                  <td>{}</td>
+                </tr>
+              </tbody>
+            </table>
+          );
+        }):null}
+    </div>
+    </>
   );
 }

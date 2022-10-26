@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
-import { previewArticle } from '../store/SingleArticle';
 import {readArticlesDates} from './dataVizHelpers'
 
 export function Indicator() {
@@ -16,8 +15,6 @@ export function Indicator() {
   //Get individual read articles organized by date read
   //Using a helper function shared between the different dataviz oomponents
   const sortedArticles = readArticlesDates(userArticles)
-
-  //----SET DATETIME FOR THIS WEEK------//
   const thisWeekStart = DateTime.now().startOf('week').toISO();
   const lastWeekStart = DateTime.now().startOf('week').minus({ days: 7 }).toISO();
 
@@ -33,7 +30,6 @@ export function Indicator() {
     }
   });
 
-  console.log(sortedArticles)
   //----GET COUNT OF ARTICLES READ LAST WEEK------//
   //Luxon converts dates to their own DateTime format, so we revert back to ISO
     ///using .toISO().
@@ -62,17 +58,6 @@ export function Indicator() {
   ];
 
   //-----DISPLAY ARTICLES READ THIS WEEK ------//
-  //Retrieve and Attach Metadata using Metascrapper.js and article URL
-  ///Metascrapper is attached to articles table and a prototype method.
-  ///we dispatch 'previewArticle' to make an API call to retrieve that metadata
-  /// about each article.
-  useEffect(() => {
-    for (let i = 0; i < articlesThisWk.length; i++)
-      dispatch(
-        previewArticle(articlesThisWk[i].article.url, articlesThisWk[i].id)
-      );
-  }, [articlesThisWk.length]);
-
   //Map Metadata to Each Article
   ///We use article Ids to match retrieved meta data with the articles we have
   ///read this week
@@ -85,7 +70,6 @@ export function Indicator() {
     }
   }, [metaData.length]);
 
-  console.log('articles this week', articlesThisWk)
   //-----DISPLAY COMPONENT INDICATOR + ARTICLES READ ------//
     //Return <Plot> react-plotly.js object to be displayed on UserMetrics page.
     //A table component is used to display the scrollable list of articles read
@@ -93,8 +77,32 @@ export function Indicator() {
     //is displayed
   return (
     <div className="dataviz-box">
-      <h1 className="dvSectionHeader">Articles Read This Week</h1>
+      <h4  className="dvSectionHeader">Articles Read This Week</h4>
       <div className="dataviz-row">
+        <table className = "weekly-article-list-table">
+            <thead></thead>
+            <tbody>
+              {articlesThisWk.map((article) => {
+                return (
+                  <tr key={article.id} className="articlerow">
+                    <td>{article.name}</td>
+                      <td className="articledetails">
+                        <a href={article.article.url}>
+                            <img
+                              src={
+                                article.article.logo
+                                  ? article.article.logo
+                                  : '/defaultBookLogo.svg'
+                              }
+                              height="40px"
+                            /></a>
+                        <div>{article.article.title}</div>
+                      </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+        </table>
         <div>
           <Plot
             data={indicatorTrace}
@@ -115,39 +123,6 @@ export function Indicator() {
             }}
           />
         </div>
-        <table>
-          <thead></thead>
-          <tbody>
-            {articlesThisWk.map((article) => {
-              return (
-                <tr key={article.id} className="articlerow">
-                  <td>{article.name}</td>
-                  {article.metadata ? (
-                    <td className="articledetails">
-                      <a href={article.article.url}>
-                          <img
-                            src={
-                              article.metadata.logo
-                                ? article.metadata.logo
-                                : '/defaultBookLogo.svg'
-                            }
-                            height="40px"
-                          /></a>
-                      <div>{article.metadata.publisher}: </div>
-                      <div>{article.metadata.title}</div>
-                    </td>
-                  ) : (
-                    <td className="articledetails">
-                      <a href={article.article.url}>
-                          <img src="/defaultBookLogo.svg" height="40px" />
-                      </a>
-                    </td>
-                  )}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
       </div>
     </div>
   );
