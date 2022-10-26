@@ -1,13 +1,37 @@
 //TAG READ UNREAD PIE CHARTS COMPONENT
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
 import {readArticlesDates, readArticlesTags, allArticlesTags,tagCounter} from './dataVizHelpers'
+import { generatedColors } from './GeneratedColors';
+import Plotly from "plotly.js-basic-dist-min";
 
-export function TagReadUnread() {
+export function TagPlots() {
   const userArticles = useSelector((state) => state.userArticles);
+  const tags = useSelector ((state)=>state.tags)
   const data = [];
+  const [visibleIndex, setIndex] = useState(0)
+  const [revision, incrementRevision] = useState(0)
+  const [traceVisibility, setVisibility] = useState(['true','legendonly','legendonly'])
+
+useEffect(()=>{
+    Plotly.Plots.resize("plotlyChart");
+},[])
+
+  function handleSwitchData(index){
+    setVisibility((traceVisibility)=>{
+        traceVisibility[visibleIndex] = 'legendonly'
+        traceVisibility[index] = 'true'
+        return traceVisibility
+    })
+
+    // console.log('new trace', traceVisibility)
+    incrementRevision(revision + 1)
+
+    setIndex(index)
+  }
+
 
   //Get individual read articles organized by date read
   //Using a helper function shared between the different dataviz oomponents
@@ -64,6 +88,16 @@ export function TagReadUnread() {
         remainingTagResult[key] = (totalarticles - totalread)
     }
 
+  //-----Build an object of "All Tags" with count per tag ------//
+    let AllTags = {}
+    AllTags = tags.tags.reduce((AllTags, item)=>{
+        let tag = item
+        return AllTags[tag]? 
+            AllTags[tag]+=1 :
+            AllTags[tag] = 1,
+            AllTags
+        },{})
+
  //-----Set Up Plotly 'TRACES' for each Pie Chart ------//
     //Build Traces for Read and Unread Article Tags
     //Sets variables that will be used in plotly individual graphs
@@ -71,6 +105,7 @@ export function TagReadUnread() {
       labels: Object.keys(readTagResult),
       values: Object.values(readTagResult),
       title: 'Read',
+      visible: traceVisibility[2],
       textposition: 'inside',
       textinfo:'none',
       hole: .3,
@@ -83,53 +118,71 @@ export function TagReadUnread() {
         labels: Object.keys(remainingTagResult),
         values: Object.values(remainingTagResult),
         title: 'Unread',
+        visible: traceVisibility[1],
         textposition: 'inside',
         textinfo:'none',
         hole: .3,
         type: 'pie',
         domain: {
-          row: 1,
+          row: 0,
           column:0 }}
 
-    data.push(remainingTagTrace)
+        const allTrace = {
+        labels: Object.keys(AllTags),
+        values: Object.values(AllTags),
+        title: 'All',
+        textposition: 'inside',
+        visible: traceVisibility[0],
+        textinfo:'none',
+        hole: .3,
+        type: 'pie',
+        domain: {
+            row: 0,
+            column:0 }}
+    
+    
+    data.push(allTrace)
     data.push(readTagTrace)
-
+    data.push(remainingTagTrace)
 
   return (
-    <div>
-      <div align = 'center'>
-    <h4>Tag Overview</h4>
-    <h5>Divided by Article Read Status</h5>
-    </div>
-    <Plot
-      data={data}
-      useResizeHandler={true}
-      style={{width: '100%', height: '100%'}}
-      layout = {{
-        margin: {
-          autoexpand: false,
-          l: 0,
-          r: 0,
-          b: 0,
-          t: 0,
-          pad: 0,
-        },
-        showlegend: true,
-        legend: {
+    <div className = "text-plot-div" >
+        <div align = 'center'>
+            <h4>Tag Overview</h4>
+            <h5>Divided by Article Read Status</h5>
+        </div>
+        <button onClick={()=>{handleSwitchData(0)}}>All Tags</button>
+        <button onClick={()=>{handleSwitchData(1)}}>Read Tags</button>
+        <button onClick={()=>{handleSwitchData(2)}}>Unread Tags</button>
 
-          xanchor: "left",
-          yanchor: "center"
-        },
-        grid: {rows: 2,
-          columns: 1,
-          pattern: 'independent',
-  }
-    }}
-      config={{
-        "displaylogo": false,
-        'modeBarButtonsToRemove': ['pan2d','lasso2d'],
-           }}
-    />
+        <Plot
+        data={data}
+        style = {{width: "90%", height: "90%"}}
+        divId="plotlyChart"
+        revision={revision}
+        useResizeHandler = "true"
+        layout = {{
+            autosize: true,
+            margin: {
+              autoexpand: true,
+              l: 0,
+              r: 0,
+              b: 50,
+              t:50,
+              pad: 0,
+            },
+            showlegend: true,
+            legend:{
+                orientation: 'v',
+                y:0.5,
+                }
+        }}
+        config={{
+            "displaylogo": false,
+            'modeBarButtonsToRemove': ['pan2d','lasso2d'],
+            }}
+        />
+
     </div>
   );
 }

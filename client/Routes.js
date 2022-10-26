@@ -12,10 +12,9 @@ import { ViewSharing } from './components/sharing/ViewSharing';
 import { EditBookmark } from './components/EditBookmark/EditBookmark';
 import { LandingPage } from './components/LandingPage';
 import NewUser from './components/NewUser';
-
 import { me } from './store';
 import { UserArticlesTab } from './components/UserArticlesTab';
-import { dataDirectory } from './dataviz/dataDirectory';
+import { dataDirectory } from './dataviz/index';
 
 class Routes extends Component {
   componentDidMount() {

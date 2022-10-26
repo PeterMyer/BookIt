@@ -52,8 +52,6 @@ export function TimeChart() {
     yhelperRead.push(value.length);
   }
 
-  console.log('yread totals', yhelperRead)
-
   for (let i = 0; i < yhelperRead.length; i++) {
     if (i === 0) {
       yReadTotal.push(yhelperRead[i]);
@@ -89,44 +87,52 @@ export function TimeChart() {
 
   data.push(readArticleTrace, addedArticleTrace);
 
+
   return (
     <div className = "backlog-plot-container">
       <h4>Total Backlog v. Amount Read</h4>
     <Plot
       data={data}
       useResizeHandler={true}
-      style={{width: '100%', height: '100%'}}
+      style={{width: '100%', height: '100%' }}
       layout={{
-        margin:{b:0},
+        margin:{b:0,
+        r: 0},
         barmode: 'stack',
         xaxis: {
+          tickformat: "%m-%d-%y",
           autorange: true,
-          // tickformat: '%B %Y',
+          showgrid: false,
+          showticklabels: true,
+          automargin: true,
           range: [xAddedDates[0], DateTime.utc().toFormat('yyyy-MM-dd')],
-          rangeselector: {
-            buttons: [
-              {
-                count: 1,
-                label: '1m',
-                step: 'month',
-                stepmode: 'backward',
-              },
-              {
-                count: 6,
-                label: '6m',
-                step: 'month',
-                stepmode: 'backward',
-              },
-              { step: 'all' },
-            ],
-          },
-          rangeslider: { range: [xAddedDates[0], DateTime.utc().toISO()] },
+          // rangeselector: {
+          //   buttons: [
+          //     {
+          //       count: 1,
+          //       label: '1m',
+          //       step: 'month',
+          //       stepmode: 'backward',
+          //     },
+          //     {
+          //       count: 6,
+          //       label: '6m',
+          //       step: 'month',
+          //       stepmode: 'backward',
+          //     },
+          //     { step: 'all' },
+          //   ],
+          // },
+          // rangeslider: { range: [xAddedDates[0], DateTime.utc().toISO()] },
           type: 'date',
         },
         yaxis: {
           autorange: true,
           type: 'linear',
+          showgrid: false
+
         },
+        
       }}
       config={{"responsive": true}}
     />

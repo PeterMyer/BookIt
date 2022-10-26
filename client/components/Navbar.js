@@ -7,7 +7,7 @@ import Topbar from './Navigation/Topbar';
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <nav
     className="navbar navbar-light bg-light static-top"
-    style={{ paddingTop: '0px', paddingBottom: '0px' }}
+    style={{ paddingTop: '0px', paddingBottom: '0px'}}
   >
     <div className="container">
       <Link

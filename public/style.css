@@ -29,10 +29,6 @@ nav a {
   margin: 1em;
 }
 
-/* form.pure-form div {
-  margin: 1em;
-  display: inline-block;
-} */
 
 form div {
   margin: 1em;
@@ -42,9 +38,6 @@ form div {
 .app-container {
   width: 100%;
   height: 100%;
-  /* min-height: 50vh;
-    display: flex;
-    flex-direction: column; */
 }
 /* -------------------------------------- TOP-BAR-------------------------- */
 /* WRAPPER OF TOP-BAR(BOOKIT/METRICS/CREATE-BOOKMARK) */
@@ -56,7 +49,10 @@ form div {
   padding: 5px;
   margin: 5px;
   border-radius: 6px;
+
 }
+
+
 .bookmark--logo {
   flex: 20%;
   display: flex;
@@ -71,6 +67,7 @@ form div {
   flex: 80%;
   display: flex;
   justify-content: space-between;
+
 }
 
 .top-navbar-links {
@@ -590,7 +587,6 @@ flex-flow: row wrap
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
-  max-width: 90%;
   margin: 0px
 }
 
@@ -633,10 +629,10 @@ flex-flow: row wrap
   height: 100%
 }
 
-.tag-plot-container{
+/* .tag-plot-container{
   width: 50%;
   height: 80%
-}
+} */
 
 /* ----------------------------------MODAL FOR EDIT/DELETE BOOKMARKS-------------------------------- */
 
@@ -766,3 +762,30 @@ flex-flow: row wrap
   
 }
 
+.user-content-tags-container{
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.user-content-tags-display{
+  color: grey;
+
+  border-style: solid;
+  border-width: small;
+
+  border-color: grey;
+  border-radius: 10px;
+  
+  margin: 2px;
+  padding: 3px
+}
+
+#plotly-tag-chart{
+  width: '100%';
+   height:'100%'
+}
+
+.text-plot-div{
+  height: 100%;
+  width: 100%
+}

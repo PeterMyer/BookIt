@@ -3,13 +3,12 @@ import { Indicator} from './indicator'
 import { Calendar } from './Calendar';
 import { BasicMetrics } from './BasicStats';
 import { TimeChart } from './TimeChart';
-import {TagReadUnread} from './TagReadUnreadRatio'
+import { UserContent } from "./UserContent";
+import {TagPlots} from "./TagPlots"
 
 export function DataTabs(){
 
-    const openTab=(event, cityName)=>{
-        console.log(cityName)
-
+    const openTab=(event, tabName)=>{
     // Get all elements with class="tabcontent" and hide them
     let tabcontent = document.getElementsByClassName("tabcontent");
     for (let i = 0; i < tabcontent.length; i++) {
@@ -23,9 +22,9 @@ export function DataTabs(){
     }
   
     // Show the current tab, and add an "active" class to the link that opened the tab
-    let thisDocument = document.getElementById(cityName)
+    let thisDocument = document.getElementById(tabName)
     thisDocument.style.display = "block";
-    evt.currentTarget.className += " active";
+    event.currentTarget.className += " active";
     }
 
     useEffect(()=>{
@@ -35,8 +34,10 @@ export function DataTabs(){
     return(
         <article className = "user-metrics-container">
             <div class="tab">
-                <button class="tablinks" id="defaultOpen" onClick={()=>openTab(event, "ReadingHistory")}>Reading History</button>
+                <button class="tablinks" id="defaultOpen" onClick={()=>openTab(event, "UserContent")}> Your Content</button>
+                <button class="tablinks"  onClick={()=>openTab(event, "ReadingHistory")}>Reading History</button>
                 <button class="tablinks" onClick={()=>openTab(event, "Backlog")}>Backlog</button>
+
             </div>
             <section className = "user-metrics-tab-content-container">
                 <div id="ReadingHistory" class="tabcontent">
@@ -48,11 +49,17 @@ export function DataTabs(){
                         <Calendar />
                     </div>
                 </div>
+                <div id="UserContent" class="tabcontent">
+                     {/* <BasicMetrics/> */}
+                    <div className = "dataviz-row">
+                        <UserContent/>
+                    </div>
+                </div>
                 <div id="Backlog" class="tabcontent">
-                     <BasicMetrics/>
+                     {/* <BasicMetrics/> */}
                     <div className = "dataviz-row">
                         <TimeChart id="backlogChart"/>
-                        <TagReadUnread id="tagChart"/>
+                        <TagPlots id="tagChart"/>
                     </div>
                 </div>
             </section>
