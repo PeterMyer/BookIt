@@ -1,7 +1,8 @@
+require('dotenv').config();
 const { db } = require('./db');
 const PORT = process.env.PORT || 8080;
 const app = require('./app');
-require('dotenv').config();
+
 
 const init = async () => {
   try {

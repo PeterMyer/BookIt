@@ -1,4 +1,6 @@
-require('dotenv').config();
+require('dotenv').config( {
+  path: path.join(__dirname, '.env')
+} );
 
 module.exports = {
   mode: process.env.DEV ? 'development' : 'production',
@@ -17,6 +19,11 @@ module.exports = {
   },
   devtool: false,
   // 'source-map',
+  plugins: [
+    new webpack.DefinePlugin( {
+      "process.env": dotenv.parsed
+    } ),
+  ],
   module: {
     rules: [
       {
