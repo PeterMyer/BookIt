@@ -26,7 +26,6 @@ router.post("/", async (req, res, next) => {
         res.status(201).send(
             await User.create({
                 username,
-                // email,
                 password
             })
         );
