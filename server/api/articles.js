@@ -3,7 +3,6 @@ const {
   models: { Article, UserArticle, Tag, Tagging },
 } = require('../db/index');
 const sequelize = require('../db/db');
-const { date } = require('faker');
 
 const getallArticles = async (req, res, next) => {
   try {
