@@ -22,7 +22,7 @@ router.get("/", async (req, res, next) => {
 // POST /api/users
 router.post("/", async (req, res, next) => {
     try {
-        const { username, email, password } = req.body;
+        const { username, password } = req.body;
         res.status(201).send(
             await User.create({
                 username,

@@ -6,13 +6,13 @@ const {
   db,
   models: { User },
 } = require('../db');
-const seed = require('../../script/seed');
+// const seed = require('../../script/seed');
 const app = require('../app');
 
 describe('User routes', () => {
-  beforeEach(async () => {
-    await seed();
-  });
+  // beforeEach(async () => {
+  //   await seed();
+  // });
 
   describe('/api/users/', () => {
     it('GET /api/users', async () => {
