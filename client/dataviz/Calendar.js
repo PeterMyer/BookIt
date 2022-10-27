@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
 const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
 import {readArticlesDates} from './dataVizHelpers'
+import Plotly from "plotly.js-basic-dist-min";
+
 
 export function Calendar() {
   const userArticles = useSelector((state) => state.userArticles);
@@ -10,15 +12,17 @@ export function Calendar() {
   let [readArtcilesOnDate, setReadArticles] = useState([])
   let [selectedDate, setselectedDate] = useState(null)
 
-
   function handleClick(data){
-    console.log('data', data)
     let seperatedDate = data.points[0].text.split(" ")
     let cleanedDate = seperatedDate[0].trim()
       setselectedDate(cleanedDate)
     let selectedArtciles = sortedArticles[cleanedDate]
     setReadArticles(selectedArtciles)
   }
+
+  useEffect(()=>{
+    Plotly.Plots.resize("plotlyChart");
+  },[])
 
   //Get individual read articles organized by date read
   //Using a helper function shared between the different dataviz oomponents
@@ -114,23 +118,24 @@ export function Calendar() {
         [true, '#2ECC71']]
     },
   ];
-
   //-----Plot Graph ------//
   //Return <Plot> react-plotly.js object to be displayed on UserMetrics page.
   // Sets overall graph size and display options
-
-
   return (
-    <>
+    <div className="tab-content-row">
+      <div id="plotly-calendar" className = "user-content-container">
+      <strong className = "subcategory-title">Read This Year</strong >
       <Plot
+        divId="plotlyCalendar"
+        useResizeHandler = "true"
+
         data={calendarTrace}
-        useResizeHandler={true}
-        style={{width: '100%', height: '100%'}}
+        // useResizeHandler={true}
+        style={{width: '900px', height: "150px"}}
         config={{displayModeBar: false}}
         onClick={((data)=>handleClick(data))}
         layout={{
-          autosize: false,
-          height:200,
+          autosize: true,
           margin:{      
             t: 0,
             b: 60
@@ -139,9 +144,8 @@ export function Calendar() {
           yaxis: {
             showline: true,
             tickmode: 'array',
-            ticktext: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-            tickvals: [1, 2, 3, 4, 5, 6,7],
-            title: 'Weekdays',
+            ticktext: ['Mon', 'Wed', 'Fri'],
+            tickvals: [1, 3, 5],
           },
           xaxis:{
             showline:false,
@@ -166,13 +170,13 @@ export function Calendar() {
                     <div>{article.article.title}</div>
                     </a>
                   </td>
-                  <td>{}</td>
                 </tr>
               </tbody>
             </table>
           );
         }):null}
-    </div>
-    </>
+      </div>
+      </div>
+      </div>
   );
 }

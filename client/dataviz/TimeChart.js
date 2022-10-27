@@ -90,14 +90,15 @@ export function TimeChart() {
 
   return (
     <div className = "backlog-plot-container">
-      <h4>Total Backlog v. Amount Read</h4>
+      <strong className = "subcategory-title">Backlog Over Time</strong >
     <Plot
       data={data}
       useResizeHandler={true}
-      style={{width: '100%', height: '100%' }}
+      // style={{width: '100%', height: '100%' }}
       layout={{
         margin:{b:0,
-        r: 0},
+        r: 0,
+        l:0},
         barmode: 'stack',
         xaxis: {
           tickformat: "%m-%d-%y",
@@ -134,7 +135,10 @@ export function TimeChart() {
         },
         
       }}
-      config={{"responsive": true}}
+      config={{
+        "displaylogo": false,
+        'modeBarButtonsToRemove': ['pan2d','lasso2d','zoom2d'],
+        }}
     />
     </div>
   );

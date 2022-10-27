@@ -77,7 +77,6 @@ export function UserArticles() {
                     <h4>
                         Your Pages
                     </h4>
-                    <h4>Total Pages: {articles.length}</h4>
                 </div>
                 <div className="display-articles--container pure-g">
                     {articles

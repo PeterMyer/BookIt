@@ -25,9 +25,9 @@ export function BasicMetrics() {
     }}
 
   return (
-  <div>
-    <h3>
-      You've read <span class="highlight">{readArticles.length}</span> of your <span class="highlight">{userArticles.length}</span> saved articles, using <span class="highlight">{allTagsList.length}</span>  different tags.
-    </h3>
+  <div id="content-sub-header" >
+    <strong><i>
+      <span class="highlight">{userArticles.length}</span> saved articles, using <span class="highlight">{allTagsList.length}</span>  different tags.
+      </i></strong>
   </div>
   )}

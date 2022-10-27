@@ -146,7 +146,7 @@ useEffect(()=>{
     data.push(remainingTagTrace)
 
   return (
-    <div className = "text-plot-div" >
+    <div className = "backlog-tag-plot-container" >
         <div align = 'center'>
             <h4>Tag Overview</h4>
             <h5>Divided by Article Read Status</h5>
@@ -168,7 +168,7 @@ useEffect(()=>{
               l: 0,
               r: 0,
               b: 50,
-              t:50,
+              t:0,
               pad: 0,
             },
             showlegend: true,

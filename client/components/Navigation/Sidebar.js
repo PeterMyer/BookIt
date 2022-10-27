@@ -8,7 +8,7 @@ const Sidebar = () => {
             <nav>
                 <div>
                     <div className="sidebar-tags-selector-div">
-                        <h4>Submit bookmark</h4>
+                        <h4>Filter Pages</h4>
                     </div>
                     <TagFilter />
                 </div>

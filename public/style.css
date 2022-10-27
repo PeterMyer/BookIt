@@ -38,6 +38,7 @@ form div {
 .app-container {
   width: 100%;
   height: 100%;
+  margin-top: 100px;
 }
 /* -------------------------------------- TOP-BAR-------------------------- */
 /* WRAPPER OF TOP-BAR(BOOKIT/METRICS/CREATE-BOOKMARK) */
@@ -51,8 +52,6 @@ form div {
   border-radius: 6px;
 
 }
-
-
 .bookmark--logo {
   flex: 20%;
   display: flex;
@@ -63,11 +62,15 @@ form div {
   border-radius: 25px;
 }
 /*------------------ TOP-BAR WITH BOOKIT/METRICS/CREATE-BOOKMARK/LOGOUT ------*/
+.navbar {
+  box-shadow: 5px 2px 5px var(--color-bookmark-shadow);
+}
+
+
 .top_navbar {
   flex: 80%;
   display: flex;
   justify-content: space-between;
-
 }
 
 .top-navbar-links {
@@ -206,9 +209,9 @@ form div {
   max-width: 100%
 }
 
-.single-article-buttons-container{
+/* .single-article-buttons-container{
 
-}
+} */
 
 .article-name--single-article {
   /* color: rgb(87, 87, 87); */
@@ -541,6 +544,10 @@ flex-flow: row wrap
 }
 /* -------------------------------------- FOOTER ----------------------------*/
 .footer {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  width:100%;
   margin: 0px 5px 0px 5px;
   padding: 1px 5px 0px 1px;
   background-color: var(--color-light-yellow);
@@ -563,6 +570,13 @@ flex-flow: row wrap
 
 /* ----------------------------------DATAVIZ -------------------------------- */
 
+.data-viz-top-container{
+  min-height: 500px;
+  height: 100%;
+  width: 100%;
+  height: fit-content
+}
+
 .dvSectionHeader {
   display: flex;
   height: 70px;
@@ -571,34 +585,27 @@ flex-flow: row wrap
   border-radius: 10px;
   align-self: flex-start;
 }
-.dataviz-box {
-  display: flex;
-  justify-content: space-between;
-  border: none;
-  max-width: 80%;
-  flex-direction: column;
-  margin: 15px;
-  border-radius: 10px;
-  align-content: center;
-  
-}
 
-.dataviz-row {
+.tab-content-row {
   display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
-  margin: 0px
+  flex-direction: row ;
+  justify-content: flex-start;
+  padding-left: 5%;
+  padding-bottom: 2%;
+  padding-right: 5%;
 }
 
 .weekly-article-list-table{
+  padding: 5px;
   display: block;
   overflow: auto;
   height: 200px;
-  max-width: 800px;
-  min-width: 200px;
-  border: 1px solid black;
+  max-width: 40000px;
+  border: 1px solid rgb(228, 228, 228);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  border-collapse: collapse;
+  overflow-x: scroll;
 }
-
 
 .highlight {
   color: #48b2e7;
@@ -607,10 +614,11 @@ flex-flow: row wrap
 .articlerow {
   display: block;
   text-align: left;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: baseline;
+  padding: 5px;
+  border-top: 1px solid rgb(228, 228, 228);
 }
 
 .articledetails {
@@ -624,9 +632,30 @@ flex-flow: row wrap
   display: block;
 }
 
+.table-article-titles{
+  display:flex;
+  flex-direction: column;
+  padding-left: 3px;
+}
+
+.table-row-article-title-original{
+  font-size: small;
+}
+
+#backlog{
+  display: flex;
+  flex-direction: row;
+}
+
 .backlog-plot-container{
-  width: 50%;
-  height: 100%
+  max-width: 50%;
+  max-height: 30%
+}
+.backlog-tag-plot-container{
+  height: 100%;
+  width: 30%;
+  max-width: 60%;
+
 }
 
 /* .tag-plot-container{
@@ -704,15 +733,19 @@ flex-flow: row wrap
 .user-metrics-container{
     display:flex;
     flex-direction: row;
+    padding-right: 10%;
 }
 
 .tab {
     display: flex;
     flex-direction: column;
     float: left;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    width: 20%;
+    padding-left: 5%;
+    padding-top: 2%;
+    /* border: 1px solid #ccc;
+    background-color: #f1f1f1; */
+    width: 18%;
+    height: 100%;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -720,7 +753,7 @@ flex-flow: row wrap
   display: block;
   background-color: inherit;
   color: black;
-  padding: 22px 16px;
+  padding: 15px 16px;
   width: 100%;
   border: none;
   outline: none;
@@ -740,20 +773,17 @@ flex-flow: row wrap
 }
 
 /* Style the tab content */
-.tabcontent {
-  /* float: left;
-  padding: 0px 12px;
-  width: 100%;
-  border-left: none;
-  height: 300px;
-  display:none */
-}
 
 .user-metrics-tab-content-container{
     display: flex;
     flex-direction: column;
     align-content:center;
-    width: 100%
+    width: 90%;
+    padding-left: 5%;
+}
+
+.tab-content{
+
 }
 
 .calendar-article-list-table{
@@ -763,8 +793,13 @@ flex-flow: row wrap
 }
 
 .user-content-tags-container{
+  max-width:50%;
   display: flex;
   flex-flow: row wrap;
+}
+
+#content-sub-header{
+  color: grey
 }
 
 .user-content-tags-display{
@@ -785,7 +820,37 @@ flex-flow: row wrap
    height:'100%'
 }
 
-.text-plot-div{
-  height: 100%;
-  width: 100%
+
+.user-content-container{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  width: 100%;
+  padding-top: 10px;
+}
+
+#reading-history-weekly{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#week-v-last-indicator{
+  padding-left: 15%;
+}
+
+#plotly-calendar{
+  max-width: 1000px;
+  min-width: 150px;
+    /* height: 9vw; */
+  overflow: scroll;
+}
+
+/* .user-content-publisher-display{
+  display: flex;
+  flex-direction: column;
+} */
+
+.subcategory-title{
+  font-size: large;
 }

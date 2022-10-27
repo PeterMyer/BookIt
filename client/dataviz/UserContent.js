@@ -1,8 +1,5 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { generatedColors } from './GeneratedColors';
-import { TimeChart } from './TimeChart';
-
+import { useSelector } from 'react-redux';
 
 export function UserContent(){
     const userArticles = useSelector((state) => state.userArticles);
@@ -13,8 +10,11 @@ export function UserContent(){
     publisherContent = userArticles.reduce((publisherContent, item)=>{
         let publisher = item.article.publisher
         return publisherContent[publisher]? 
-            publisherContent[publisher]+=1 :
-            publisherContent[publisher] = 1,
+            publisherContent[publisher].count+=1 :
+            publisherContent[publisher] = {
+                'name':publisher,
+                'count': 1,
+                'logo':item.article.logo},
             publisherContent
         },{})
 
@@ -26,14 +26,18 @@ export function UserContent(){
             tagContent
         },{})
 
+    
     return(
-    <div>
-        <strong>Your Favorite Publishers</strong>
-        <div className = "user-content-publisher-container">
+
+    <div className = "tab-content-row">
+        <div className = "user-content-container">
+            <strong className = "subcategory-title">Favorite Publishers</strong >
             {publisherContent ? Object.entries(publisherContent).slice(0,10).map((publisher, index)=>{
                 return(
                 <div className = "user-content-publisher-display" key = {index}>
-                    {publisher[0]} : {publisher[1] } {publisher[1] >1? "Pages": "Page"}
+                    {/* <img style={{height: "70px"}} src = {publisher[1].logo} alt="null"></img> */}
+                    {publisher[0]} : 
+                    <i>{publisher[1].count } {publisher[1].count >1? "Pages": "Page"}</i>
                 </div>)
             })
         :
@@ -42,20 +46,21 @@ export function UserContent(){
             </div>
         }
         </div>
-        <strong>Your Tags</strong>
-        <div className = "user-content-tags-container">
-            {tags ? Object.keys(tagContent).map((tag, index)=>{
-                return(
-                    // style={{'border-color':generatedColors[index]}} 
-                <div className = "user-content-tags-display"  key = {index}>
-                    {tag}
-                </div>)
-            })
-        :
-            <div>
-                null
+        <div className = "user-content-container">
+            <strong className = "subcategory-title">Tags</strong >
+            <div className = "user-content-tags-container">
+                {tags ? Object.keys(tagContent).map((tag, index)=>{
+                    return(
+                    <div className = "user-content-tags-display"  key = {index}>
+                        {tag}
+                    </div>)
+                })
+            :
+                <div>
+                    null
+                </div>
+            }
             </div>
-        }
         </div>
     </div>)
 }

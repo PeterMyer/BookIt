@@ -5,7 +5,7 @@ const { DateTime } = require('luxon');
 import Plot from 'react-plotly.js';
 import {readArticlesDates} from './dataVizHelpers'
 
-export function Indicator() {
+export function ReadingHistory() {
   const dispatch = useDispatch();
   const userArticles = useSelector((state) => state.userArticles);
   const metaData = useSelector((state) => state.metaData);
@@ -49,7 +49,6 @@ export function Indicator() {
   const indicatorTrace = [
     {
       type: 'indicator',
-      title: 'This Week v. Last',
       mode: 'number+delta',
       value: articlesThisWk.length,
       delta: { reference: articlesLastWk.length, position: 'top' },
@@ -76,34 +75,40 @@ export function Indicator() {
     //this week and attached metadata if available. If none available default
     //is displayed
   return (
-    <div className="dataviz-box">
-      <h4  className="dvSectionHeader">Articles Read This Week</h4>
-      <div className="dataviz-row">
-        <table className = "weekly-article-list-table">
-            <thead></thead>
-            <tbody>
-              {articlesThisWk.map((article) => {
-                return (
-                  <tr key={article.id} className="articlerow">
-                    <td>{article.name}</td>
-                      <td className="articledetails">
-                        <a href={article.article.url}>
-                            <img
-                              src={
-                                article.article.logo
-                                  ? article.article.logo
-                                  : '/defaultBookLogo.svg'
-                              }
-                              height="40px"
-                            /></a>
-                        <div>{article.article.title}</div>
-                      </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-        </table>
-        <div>
+      <div className="tab-content-row">
+        <div className = "user-content-container">
+          <strong className = "subcategory-title">Read This Week</strong >
+          <table className = "weekly-article-list-table">
+              <thead></thead>
+              <tbody>
+                {articlesThisWk.map((article) => {
+                  return (
+                    <tr key={article.id} className="articlerow">
+                        <td className="articledetails">
+                          <a href={article.article.url}>
+                              <img
+                                src={
+                                  article.article.logo
+                                    ? article.article.logo
+                                    : '/defaultBookLogo.svg'
+                                }
+                                alt=""
+                                height="50px"
+                                width="50px"
+                              /></a>
+                          <div className = "table-article-titles">
+                            <td>{article.name}</td>
+                            <td className="table-row-article-title-original"><i>{article.article.title}</i></td>
+                          </div>
+                        </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+          </table>
+        </div>
+        <div id="week-v-last-indicator" className = "user-content-container">
+          <strong className = "subcategory-title">This Week v. Last</strong >
           <Plot
             data={indicatorTrace}
             layout={{
@@ -113,7 +118,7 @@ export function Indicator() {
                 l: 0,
                 r: 0,
                 b: 5,
-                t: 50,
+                t: 0,
                 pad: 0,
               },
             }}
@@ -124,6 +129,5 @@ export function Indicator() {
           />
         </div>
       </div>
-    </div>
   );
 }

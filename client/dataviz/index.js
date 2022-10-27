@@ -18,7 +18,7 @@ export function dataDirectory () {
     }, [dispatch]);
 
     return (
-      <div>
+      <div className = "data-viz-top-container">
         <DataTabs/>
       </div>
     )
