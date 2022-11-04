@@ -5,10 +5,10 @@ BookIt is a web app and Chrome extension combo that allows users to collect, tag
 
 <h2> Installing the BookIt Extension </h2>
 You can find instructions for downloading and installing the extension in the below repository:  
-https://github.com/Yoshi-s-Yodelers/BookItExtension
+https://github.com/petermyer/BookItExtension
 
 <h2> Accessing BookIt </h2>
-You can access BookIt at https://book-it-web.herokuapp.com/
+You can access BookIt at https://bookit-web-app.herokuapp.com/
 
 <h2> Technologies </h2>
 The main technologies used to create BookIt include:  
