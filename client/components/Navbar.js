@@ -31,8 +31,11 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
           <a href="https://github.com/BookItWebApp/BookItExtension">
             Get the BookIt Extension for Chrome Browser
           </a>
+          <Link to="/login">
+            <button className="btn btn-primary">Log In</button>
+          </Link>
           <Link to="/signup">
-            <button className="btn btn-primary">Sign Up/Log In</button>
+            <button className="btn btn-primary">Create Account</button>
           </Link>
         </div>
       )}
