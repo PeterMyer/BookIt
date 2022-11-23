@@ -8,8 +8,7 @@ const Tag = db.define("tag", {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
-            notEmpty: true,
-            notContains: [" "]
+            notEmpty: true
         }
     }
 });
