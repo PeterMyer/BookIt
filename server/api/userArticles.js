@@ -44,14 +44,14 @@ router.get('/:id', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const { name, userId, articleId, featured } = req.body;
-    const userArticles = await UserArticle.create({
+    const userArticle = await UserArticle.create({
       name: name,
       userId: userId,
       articleId: articleId,
       featured: featured,
     });
-    // console.log("CREATED ARTICLE: ", userArticles);
-    res.json(userArticles);
+
+    res.json(userArticle);
   } catch (err) {
     console.log('CREATE ARTICLE ERR: ', err);
     next(err);

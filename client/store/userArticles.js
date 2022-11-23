@@ -65,10 +65,11 @@ export const getUserArticles = (id) => {
 export const createNewArticle = (article, userId, history) => {
   return async (dispatch) => {
     try {
-      const { data } = await axios.post(`/api/articles`, {
+      const {data} = await axios.post(`/api/articles`, {
         article,
         userId,
       });
+      console.log('response',data)
       dispatch(_createUserArticle(data));
       history.push('/home');
     } catch (err) {
