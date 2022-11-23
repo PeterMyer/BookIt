@@ -119,28 +119,28 @@ class CreateArticle extends React.Component {
                         </div>
 
                         <br />
-                        {tags.map((tag, index) => {
-                            return (
-                                <div key={index} className="pure-control-group">
-                                    <label htmlFor="tags">Add tag</label>
-                                    <input
-                                        name="tags"
-                                        placeholder="ex: sport, food, etc"
-                                        value={tag}
-                                        onChange={(e) =>
-                                            this.onTagValueChange(e, index)
-                                        }
-                                    />
-                                </div>
-                            );
-                        })}
-                        <button
-                            type="button"
-                            className="button-secondary pure-button"
-                            onClick={this.addTagPlaceHolder}
-                        >
-                            +
-                        </button>
+                            {tags.map((tag, index) => {
+                                return (
+                                    <div key={index} className="pure-control-group">
+                                        <label htmlFor="tags">Add tag</label>
+                                        <input
+                                            name="tags"
+                                            placeholder="ex: sport, food, etc"
+                                            value={tag}
+                                            onChange={(e) =>
+                                                this.onTagValueChange(e, index)
+                                            }
+                                        />
+                                    </div>
+                                );
+                            })}
+                            <button
+                                type="button"
+                                className="button-secondary pure-button"
+                                onClick={this.addTagPlaceHolder}
+                            >
+                                +
+                            </button>
                         <br />
                         <div className="btns--create-new-article-component">
                             <button

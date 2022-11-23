@@ -16,6 +16,7 @@ export function UserArticles() {
     const history = useHistory();
 
     articles.forEach((element) => {
+        console.log('article', element)
         const tags = element.taggings.map((item) => item.tag.name);
         element.tags = tags;
     });

@@ -3,6 +3,7 @@ const {
   models: { Article, UserArticle, Tag, Tagging },
 } = require('../db/index');
 const sequelize = require('../db/db');
+const { create } = require('react-test-renderer');
 
 const getallArticles = async (req, res, next) => {
   try {
@@ -78,7 +79,9 @@ const postArticle = async (req, res, next) => {
       })
     );
 
-    const createdArticle = await UserArticle.findByPk(
+    await t.commit();
+
+    const createdArticle = await UserArticle.findByPk( 
       userArticle.id,
       {
         include: [
@@ -88,18 +91,16 @@ const postArticle = async (req, res, next) => {
           },
           {
             model: Tagging,
-            include: {
+            include:
+              {
               model: Tag,
             },
           },
         ],
-      },
-      { transaction: t }
+      }
     );
 
-    await t.commit();
-
-    res.status(201).send();
+    res.status(201).send(createdArticle);
   } catch (error) {
     console.log('CREATE ARTICLE ERR: ', error);
     await t.rollback();
