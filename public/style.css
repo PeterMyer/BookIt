@@ -133,7 +133,7 @@ form div {
   height: 100%; /* 100% Full-height */
   width: 0; /* 0 width - change this with JavaScript */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
+  z-index: 2; /* Stay on top */
   margin-top: 30px;
   left: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
@@ -195,11 +195,13 @@ form div {
   flex-wrap: wrap;
   margin-bottom: 5px;
   margin-left: 5px;
+  z-index: 1;
 }
 .text--tag-filter--form {
   /* text-transform: uppercase; */
   font-size: 13px;
 }
+
 
 /* --------------------------------------USER ARTICLES ----------------*/
 .user-articles-total--username-div {

@@ -69,6 +69,7 @@ const TagFilter = () => {
             </div>
 
             <MultiSelectDropdown
+                id="multiSelect"
                 usrTagsProps={userTags}
                 onChangeSelection={onDropDownSelectionChange}
             />

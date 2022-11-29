@@ -72,13 +72,15 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
 
     return (
         <ReactMultiSelectCheckboxes
+            id= "multiSelect"
             options={[{ label: "All", value: "*" }, ...tagsObj]}
             placeholderButtonLabel="Tags"
             getDropdownButtonLabel={getDropdownButtonLabel}
             value={selectedOptions}
             onChange={onChange}
             setState={setSelectedOptions}
-            width={"150px"}
+            width={"100px"}
+            
         />
     );
 };
