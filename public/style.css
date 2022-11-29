@@ -30,11 +30,6 @@ nav a {
 }
 
 
-form div {
-  margin: 1em;
-  display: inline-block;
-}
-
 .app-container {
   width: 100%;
   height: 100%;
@@ -111,7 +106,7 @@ form div {
 /* LEFT SIDE OF USER ARTICLE CONTAINER WHICH IS TAG FILTER SIDE-BAR */
 .left-side--user-article-container {
   height: 100%;
-  flex: 15%;
+  /* flex: 15%; */
   padding: 5px;
 }
 /* RIGHT SIDE OF USER ARTICLE CONTAINER WHICH IS ALL USER ARTICLES */
@@ -128,17 +123,79 @@ form div {
   /* background-color: var(--color-bookmars-background); */
 }
 
+/* The sidebar menu */
+.sidebar {
+  height: 100%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Stay on top */
+  margin-top: 30px;
+  left: 0;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+}
+
+.sidebar-header {
+  text-align: center;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidebar .closebtn {
+  position: relative;
+  top: 0;
+  text-align: right;
+  font-size: 36px;
+}
+
+/* The button used to open the sidebar */
+.filterbtn {
+  font-size: 20px;
+  cursor: pointer;
+  color: darkgray;
+  padding: 10px 15px;
+  border:solid;
+  border-color: lightgray;
+  border-radius: 15px;
+}
+
+.filterbtn:hover {
+  color: rgb(85, 84, 84);
+  box-shadow: 1px 2px lightgray
+
+
+}
+
+#multiselect{
+  border: 1px solid #364c63;
+  border-radius: 4px;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left .5s; /* If you want a transition effect */
+  padding: 20px;
+}
+
 /* ----------------------------------- TAG SELECTOR ---------------------- */
 .tag-filter--form {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   margin-bottom: 5px;
   margin-left: 5px;
+  z-index: 1;
 }
 .text--tag-filter--form {
   /* text-transform: uppercase; */
   font-size: 13px;
+}
+
+#filter-submit{
+  margin-top: 1em;
 }
 
 /* --------------------------------------USER ARTICLES ----------------*/
@@ -563,10 +620,6 @@ flex-flow: row wrap
   height: 50px;
 }
 
-.css-1hwfws3 {
-  /* width: 100px; */
-  /* height: 40px; */
-}
 
 /* ----------------------------------DATAVIZ -------------------------------- */
 

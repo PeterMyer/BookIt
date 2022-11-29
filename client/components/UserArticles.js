@@ -76,7 +76,7 @@ export function UserArticles() {
             <div className="right-side--user-article-container">
                 <div className="user-articles-total--username-div">
                     <h4>
-                        Your Pages
+                        Your Articles
                     </h4>
                 </div>
                 <div className="display-articles--container pure-g">

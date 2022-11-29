@@ -7,7 +7,6 @@ const TagFilter = () => {
     const userArticles = useSelector((state) => state.userArticles);
     const user = useSelector((state) => state.auth);
     const userTags = useSelector((state) => state.tags);
-    // console.log("ALL ARTICLES > ", userArticles);
 
     const selectedTags = useRef([]);
     const selectedTagsDD = useRef([]);
@@ -27,7 +26,6 @@ const TagFilter = () => {
                 (item) => item !== tagName
             );
         }
-        // console.log("=> SELECTEDTAGS.CURRENT >", selectedTags.current);
     };
 
     //
@@ -52,7 +50,7 @@ const TagFilter = () => {
                         className="tag-check-input"
                     />{" "}
                     <span className="text--tag-filter--form">
-                        read bookmarks
+                        read 
                     </span>
                 </label>
             </div>
@@ -65,7 +63,7 @@ const TagFilter = () => {
                         className="tag-check-input"
                     />{" "}
                     <span className="text--tag-filter--form">
-                        unread bookmarks
+                        unread 
                     </span>
                 </label>
             </div>
@@ -77,6 +75,7 @@ const TagFilter = () => {
 
             <div>
                 <input
+                    id = "filter-submit"
                     type="button"
                     value="Submit"
                     className="button-secondary pure-button"
