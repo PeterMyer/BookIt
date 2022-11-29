@@ -153,18 +153,21 @@ nav a {
 }
 
 /* The button used to open the sidebar */
-.openbtn {
+.filterbtn {
   font-size: 20px;
   cursor: pointer;
-  background-color: lightgray;
-  color: white;
+  color: darkgray;
   padding: 10px 15px;
-  border: none;
-  border-radius: 10px;
+  border:solid;
+  border-color: lightgray;
+  border-radius: 15px;
 }
 
-.openbtn:hover {
-  background-color: #444;
+.filterbtn:hover {
+  color: rgb(85, 84, 84);
+  box-shadow: 1px 2px lightgray
+
+
 }
 
 #multiselect{
@@ -617,10 +620,6 @@ flex-flow: row wrap
   height: 50px;
 }
 
-.css-1hwfws3 {
-  /* width: 100px; */
-  /* height: 40px; */
-}
 
 /* ----------------------------------DATAVIZ -------------------------------- */
 

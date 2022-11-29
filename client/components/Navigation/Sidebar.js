@@ -6,9 +6,9 @@ const Sidebar = () => {
     const [filterOpen, setFilterOpen] = useState(false)
 
     function openFilter() {
-        document.getElementById("mySidebar").style.width = "300px";
+        document.getElementById("mySidebar").style.width = "200px";
         document.getElementById("mySidebar").style.overflow = "visible";
-        document.getElementById("main").style.marginLeft = "300px";
+        document.getElementById("main").style.marginLeft = "200px";
         setFilterOpen(true)
     }
       
@@ -30,8 +30,8 @@ const Sidebar = () => {
         <div id="main">
             {
             filterOpen?
-                <button class="openbtn" onClick={()=>closeFilter()}><i class="fa-solid fa-filter-circle-xmark"></i></button>:
-                <button class="openbtn" onClick={()=>openFilter()}><i class="fa-solid fa-filter"></i></button>
+                <button class="filterbtn" onClick={()=>closeFilter()}><i class="fa-solid fa-filter-circle-xmark"></i></button>:
+                <button class="filterbtn" onClick={()=>openFilter()}><i class="fa-solid fa-filter"></i></button>
             }
         </div>
         </div>
