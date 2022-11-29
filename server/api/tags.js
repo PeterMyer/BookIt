@@ -9,8 +9,6 @@ module.exports = router;
 router.get("/", async (req, res, next) => {
     try {
         const tags = await Tag.findAll({ include: Tagging });
-
-        // console.log("ALL TAGS: ", tags);
         res.json(tags);
     } catch (err) {
         console.log("> GET /api/tags ERR: ", err);
@@ -38,11 +36,6 @@ router.get("/:id", async (req, res, next) => {
         //
         const { id } = req.params;
         const userArticles = await UserArticle.findAllTaggingsByUser(id);
-        // console.log(
-        //     ">> ROUTER GET TAGS OF USER_ARTICLES > ",
-        //     JSON.stringify(userArticles)
-        // );
-
         const name = userArticles
             .flatMap((item) => item.taggings)
             .map((item) => item.tag.name);
@@ -52,8 +45,8 @@ router.get("/:id", async (req, res, next) => {
             return;
         }
 
-        // console.log("SINGLE TAG: ", singleTag);
-        res.status(200).send(name);
+        let uniqueName = [...new Set(name)]
+        res.status(200).send(uniqueName);
     } catch (err) {
         console.log("> GET /api/tags/:ID ERR: ", err);
         next(err);

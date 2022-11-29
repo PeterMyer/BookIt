@@ -17,6 +17,7 @@ const getallArticles = async (req, res, next) => {
 const postArticle = async (req, res, next) => {
   const t = await sequelize.transaction({ autocommit: false });
   try {
+    console.log('req', req)
     let url = req.body.article.url;
     let articleName = req.body.article.name;
     let articleNote = req.body.article.note;

@@ -1,181 +1,116 @@
-import React from "react";
-import { connect } from "react-redux";
-import Topbar from "./Navigation/Topbar";
-import { createNewArticle, getUserArticles } from "../store/userArticles";
+import React, {useEffect} from "react";
+import { useForm, Controller } from "react-hook-form";
+import { createNewArticle } from "../store/userArticles";
+import { useDispatch, useSelector } from "react-redux";
+import CreatableSelect from 'react-select/creatable';
+import {getUserTags} from '../store/tag'
+import {useHistory} from "react-router-dom"
 
-class CreateArticle extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: "",
-            url: "",
-            // isPrivate: "",
-            note: "",
-            tags: [""],
-            formErrors: { name: "", url: "" },
-            nameValid: false,
-            urlValid: false,
-            formValid: false,
-            allBookmarks: []
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.addTagPlaceHolder = this.addTagPlaceHolder.bind(this);
-        this.onTagValueChange = this.onTagValueChange.bind(this);
-        this.cancelButton = this.cancelButton.bind(this);
-    }
+export default function NewArticleForm(props){
+    const dispatch = useDispatch()
+    const history = useHistory();
+    const user = useSelector((state) => state.auth);
+    const tags = useSelector ((state)=>state.tags.tags)
+    const { register, handleSubmit,control, formState: { errors } } = useForm()
 
-    handleSubmit(event) {
+    const onSubmit = async (data) => {
+        let userId = user.id;
+        let article = {
+            name: data.name,
+            url: data.url,
+            note: data.note,
+            tags: data.tags.map((tag)=>tag.value),
+        }
+        dispatch(createNewArticle(article,userId,history))
+    };
+    
+    const cancelButton=(event)=> {
         event.preventDefault();
-        let userId = this.props.auth.id;
-        let article = { ...this.state };
-        // article.isPrivate = article.isPrivate === "true";
-
-        // console.log("_CREATE SUBMIT STATE > ", this.state);
-        this.props.createNewArticle(article, userId);
-        // this.setState({})
+        history.push("/home");
     }
 
-    handleChange(event) {
-        this.setState({
-            [event.target.name]: event.target.value
-        });
-    }
+    useEffect(()=>{
+        dispatch(getUserTags(user.id))
+    },[dispatch])
 
-    addTagPlaceHolder(e) {
-        // e.preventDefault();
-        // console.log("CREATE ADD_TAG_ STATE", this.state);
-        const { tags } = this.state;
-        tags.push("");
-        this.setState({ ...this.state, tags });
-    }
-
-    onTagValueChange(e, index) {
-        const { value } = e.target;
-        const { tags } = this.state;
-        // console.log("CREATE_ON_TAG_VALUE_CHANGE=> VALUES/TAGS", value, tags);
-        tags[index] = value;
-        this.setState({ ...this.state, tags });
-    }
-
-    cancelButton(event) {
-        event.preventDefault();
-        this.props.history.push("/home");
-    }
-
-    render() {
-        const { name, url, note, tags } = this.state;
-        // console.log("=> STATE AUTH ID", this.state);
-        // console.log("=> PROPS AUTH ID", this.props);
-
-        return (
-            <div className="create-new-article-component">
-                <form
-                    onSubmit={this.handleSubmit}
-                    className="pure-form pure-form-stacked"
+    return(
+        <div className ="create-new-article-component" >
+            <form
+                id = "new-article-form"
+                className="pure-form pure-form-stacked"
+                onSubmit={handleSubmit(onSubmit)}
+            >
+                <fieldset>
+                    <div  className="pure-control-group create-article-input-section">
+                        <label htmlFor="name">Article Name</label>
+                        <input
+                            {...register("name",{required:true})}
+                                placeholder="Name"
+                            />
+                        <span className="pure-form-message-inline">
+                            Required
+                        </span>
+                    </div>
+                    <br />
+                    <div className="pure-control-group create-article-input-section">
+                        <label htmlFor="url">Article URL</label>
+                        <input
+                           {...register("url",{required:true})}
+                           placeholder="URL"
+                           type="text"
+                        />
+                        <span className="pure-form-message-inline">
+                            Required
+                        </span>
+                    </div>
+                    <br />
+                    <div className="pure-control-group create-article-input-section">
+                        <label htmlFor="note">Notes</label>
+                        <input 
+                            {...register("note",{required:false})}
+                        />
+                    </div>
+                    <br/>
+                    <div className ="create-article-tags-section">
+                    <div >
+                        <label htmlFor="tags">Tags</label>
+                        <Controller
+                            render={({field})=>(
+                                <CreatableSelect {...field}
+                                    placeholder="select or create new"
+                                    isMulti
+                                    options={
+                                        tags.map((tag)=>({
+                                        value:tag,
+                                        label:tag}))
+                                        }
+                                />
+                                )}
+                                control={control}
+                                name="tags"
+                                defaultValue = {null}
+                        />
+                        
+                    </div>
+                    <span className="pure-form-message-inline">
+                            You must use at least one tag
+                        </span>
+                    </div>
+                </fieldset>
+                <button 
+                    id="save-recipe" 
+                    className="button-secondary pure-button btns--create-new-article"
+                    type="submit" 
+                    value="Save Article"
                 >
-                    <fieldset>
-                        <div className="pure-control-group">
-                            <label htmlFor="name">Bookmark name:</label>
-                            <input
-                                name="name"
-                                value={name}
-                                required
-                                placeholder="bookmark name"
-                                onChange={this.handleChange}
-                            />
-                            <span className="pure-form-message-inline">
-                                This is a required field.
-                            </span>
-                        </div>
-
-                        <br />
-
-                        <div className="pure-control-group">
-                            <label htmlFor="url">Bookmark url:</label>
-                            <input
-                                name="url"
-                                value={url}
-                                required
-                                placeholder="bookmark URL"
-                                type="text"
-                                onChange={this.handleChange}
-                            />
-                            <span className="pure-form-message-inline">
-                                This is a required field.
-                            </span>
-                        </div>
-
-                        <br />
-
-                        <div className="pure-control-group">
-                            <label htmlFor="note">Add a note</label>
-                            <input
-                                name="note"
-                                placeholder="add your note"
-                                value={note}
-                                onChange={this.handleChange}
-                            />
-                        </div>
-
-                        <br />
-                            {tags.map((tag, index) => {
-                                return (
-                                    <div key={index} className="pure-control-group">
-                                        <label htmlFor="tags">Add tag</label>
-                                        <input
-                                            name="tags"
-                                            placeholder="ex: sport, food, etc"
-                                            value={tag}
-                                            onChange={(e) =>
-                                                this.onTagValueChange(e, index)
-                                            }
-                                        />
-                                    </div>
-                                );
-                            })}
-                            <button
-                                type="button"
-                                className="button-secondary pure-button"
-                                onClick={this.addTagPlaceHolder}
-                            >
-                                +
-                            </button>
-                        <br />
-                        <div className="btns--create-new-article-component">
-                            <button
-                                type="submit"
-                                className="button-secondary pure-button btns--create-new-article"
-                            >
-                                Create Article
-                            </button>
-                            <button
-                                onClick={(event) => this.cancelButton(event)}
-                                className="button-secondary pure-button btns--create-new-article"
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
-        );
-    }
-}
-
-const mapState = (state) => {
-    return {
-        auth: state.auth,
-        userArticles: state.userArticles,
-        errors: state.createFormError // streo api errors in createFormError property
-    };
-};
-
-const mapDispatch = (dispatch, { history }) => {
-    return {
-        createNewArticle: (article, userId) =>
-            dispatch(createNewArticle(article, userId, history)),
-        getUserArticles: (id) => dispatch(getUserArticles(id))
-    };
-};
-export default connect(mapState, mapDispatch)(CreateArticle);
+                    Save Recipe
+                </button>
+                <button
+                    onClick={(event) => cancelButton(event)}
+                    className="button-secondary pure-button btns--create-new-article"
+                >
+                    Cancel
+                </button>
+            </form>
+        </div>
+    )}

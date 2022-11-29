@@ -29,6 +29,10 @@ nav a {
   margin: 1em;
 }
 
+form div {
+  display: inline-block
+}
+
 
 .app-container {
   width: 100%;
@@ -570,6 +574,16 @@ flex-flow: row wrap
   margin: 4px;
 }
 
+.create-article-input-section{
+  padding-bottom: 10px;
+}
+.create-article-tags-section{
+  display:flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+
+}
+
 /* ---------------- LOGIN SIGN-UP CONTAINER WHEN USER LOG-IN OR SIGN UP---- */
 .login-page-container {
   border: 2px solid var(--color-light-sand);
@@ -907,3 +921,9 @@ flex-flow: row wrap
 .subcategory-title{
   font-size: large;
 }
+
+/* #new-article-form{
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%;
+} */
