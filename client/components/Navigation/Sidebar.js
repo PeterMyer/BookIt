@@ -25,9 +25,7 @@ const Sidebar = () => {
         <div className = "outerContainer">
         <div id="mySidebar" className="sidebar">
                 <h4 className = "sidebar-header" >Filter Articles</h4>
-                <div>
-                    <TagFilter />
-                </div>
+                <TagFilter />
         </div>
         <div id="main">
             {

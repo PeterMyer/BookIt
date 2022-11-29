@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
+import Select from 'react-select';
 
 const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
     // console.log("MULTI TAGS > ", usrTagsProps.tags);
@@ -18,7 +18,7 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
         const tags = filteredTags.map((tag, idx) => {
             return {
                 id: idx,
-                value: `${idx}`,
+                value: tag,
                 label: tag
             };
         });
@@ -70,19 +70,32 @@ const MultiSelectDropdown = ({ usrTagsProps, onChangeSelection }) => {
         setSelectedOptions(selectedTags);
     }
 
-    return (
-        <ReactMultiSelectCheckboxes
-            id= "multiSelect"
-            options={[{ label: "All", value: "*" }, ...tagsObj]}
-            placeholderButtonLabel="Tags"
-            getDropdownButtonLabel={getDropdownButtonLabel}
-            value={selectedOptions}
+        return (
+        <Select
+            options={tagsObj}
+            isMulti
+            // placeholderButtonLabel="Tags"
+            // getDropdownButtonLabel={getDropdownButtonLabel}
+            // value={selectedOptions}
             onChange={onChange}
-            setState={setSelectedOptions}
-            width={"100px"}
+            // setState={setSelectedOptions}
             
         />
     );
+
+    // return (
+    //     <ReactMultiSelectCheckboxes
+    //         id= "multiSelect"
+    //         options={[{ label: "All", value: "*" }, ...tagsObj]}
+    //         placeholderButtonLabel="Tags"
+    //         getDropdownButtonLabel={getDropdownButtonLabel}
+    //         value={selectedOptions}
+    //         onChange={onChange}
+    //         setState={setSelectedOptions}
+    //         width={"100px"}
+            
+    //     />
+    // );
 };
 
 export default MultiSelectDropdown;

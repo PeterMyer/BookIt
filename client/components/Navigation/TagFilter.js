@@ -69,13 +69,13 @@ const TagFilter = () => {
             </div>
 
             <MultiSelectDropdown
-                id="multiSelect"
                 usrTagsProps={userTags}
                 onChangeSelection={onDropDownSelectionChange}
             />
 
             <div>
                 <input
+                    id = "filter-submit"
                     type="button"
                     value="Submit"
                     className="button-secondary pure-button"
