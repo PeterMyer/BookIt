@@ -69,7 +69,6 @@ export const createNewArticle = (article, userId, history) => {
         article,
         userId,
       });
-      console.log('response',data)
       dispatch(_createUserArticle(data));
       history.push('/home');
     } catch (err) {
