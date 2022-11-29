@@ -103,7 +103,7 @@ export default function NewArticleForm(props){
                     type="submit" 
                     value="Save Article"
                 >
-                    Save Recipe
+                    Save Article
                 </button>
                 <button
                     onClick={(event) => cancelButton(event)}
