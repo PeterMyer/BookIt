@@ -86,7 +86,7 @@ export function UserArticles() {
                             return (
                                 <div
                                     key={article.id}
-                                    className="singleContainer pure-u-1-3"
+                                    className="singleContainer pure-article-container pure-u-1-4"
                                 >
                                     <SingleArticle article={article} />
                                 </div>

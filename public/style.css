@@ -65,7 +65,6 @@ form div {
   box-shadow: 5px 2px 5px var(--color-bookmark-shadow);
 }
 
-
 .top_navbar {
   flex: 80%;
   display: flex;
@@ -136,7 +135,7 @@ form div {
   margin-top: 30px;
   left: 0;
   overflow-x: hidden; /* Disable horizontal scroll */
-  transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  transition: 0.25s; /* 0.5 second transition effect to slide in the sidebar */
 }
 
 .sidebar-header {
@@ -170,8 +169,6 @@ form div {
 .filterbtn:hover {
   color: rgb(85, 84, 84);
   box-shadow: 1px 2px lightgray
-
-
 }
 
 #multiselect{
@@ -181,7 +178,7 @@ form div {
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 #main {
-  transition: margin-left .5s; /* If you want a transition effect */
+  transition: margin-left  .25s; /* If you want a transition effect */
   padding: 20px;
 }
 
@@ -242,13 +239,22 @@ form div {
   margin-right: 5px;
 }
 
+.pure-article-container{
+  min-width: 200px
+}
+
+
 /* --------------------------------------SINGLE ARTICLE ----------------*/
 .single-article--container {
+  display:flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 6px;
   margin: 10px;
   padding: 7px;
   box-shadow: 5px 10px 8px var(--color-bookmark-shadow);
   background-color: var(--color-white);
+  height: 390px;
 }
 
 .single-article--container:hover .delete-btn--single-article, 
@@ -266,13 +272,18 @@ form div {
   max-width: 90%;
 }
 
+.single-article-metadata-container a{
+  text-decoration: none;
+  color: black
+}
+
 .single-article-metadata-img{
   max-width: 100%
 }
 
-/* .single-article-buttons-container{
-
-} */
+.single-article-buttons-container{
+min-height: 25px
+}
 
 .article-name--single-article {
   /* color: rgb(87, 87, 87); */
