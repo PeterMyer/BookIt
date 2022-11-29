@@ -3,17 +3,37 @@ import { Link } from "react-router-dom";
 import TagFilter from "./TagFilter";
 
 const Sidebar = () => {
+    const [filterOpen, setFilterOpen] = useState(false)
+
+    function openFilter() {
+        document.getElementById("mySidebar").style.width = "300px";
+        document.getElementById("main").style.marginLeft = "300px";
+        setFilterOpen(true)
+    }
+      
+    function closeFilter() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("main").style.marginLeft = "0";
+        setFilterOpen(false)
+
+    } 
+
     return (
-        <div>
-            <nav>
+        <>
+        <div id="mySidebar" className="sidebar">
+                <h4 className = "sidebar-header" >Filter Articles</h4>
                 <div>
-                    <div className="sidebar-tags-selector-div">
-                        <h4>Filter Pages</h4>
-                    </div>
                     <TagFilter />
                 </div>
-            </nav>
         </div>
+        <div id="main">
+            {
+            filterOpen?
+                <button class="openbtn" onClick={()=>closeFilter()}><i class="fa-solid fa-filter-circle-xmark"></i></button>:
+                <button class="openbtn" onClick={()=>openFilter()}><i class="fa-solid fa-filter"></i></button>
+            }
+        </div>
+        </>
     );
 };
 
